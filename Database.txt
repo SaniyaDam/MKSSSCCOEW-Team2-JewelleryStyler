@@ -1,0 +1,281 @@
+Database=NorthernTrust
+Python for basic code–backend
+For database–mySQL
+Database :
+
+mysql> use NorthernTrust;
+Database changed
+mysql> create table Customer (
+    -> c_id int primary key ,
+    -> c_name varchar(255),
+    -> c_email varchar(255),
+    -> c_address varchar(255),
+    -> c_phno bigint
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> show tables;
++-------------------------+
+| Tables_in_northerntrust |
++-------------------------+
+| customer                |
++-------------------------+
+1 row in set (0.02 sec)
+
+mysql> create table Product(
+    -> p_id int primary key,
+    -> p_name varchar(255),
+    -> p_des varchar(255),
+    -> p_price float(10,2),
+    -> p_quantity int ,
+    -> image blob
+    -> );
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> create table RandR(
+    -> r_no int primary key,
+    -> c_id int references Customer(c_id),
+    -> p_id int references Product(p_id),
+    -> comment varchar(255),
+    -> rating int ,
+    -> r_time timestamp
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+
+mysql> alter table Customer
+    -> add bought varchar(25) default null;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc Customer;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| c_id      | int          | NO   | PRI | NULL    |       |
+| c_name    | varchar(255) | YES  |     | NULL    |       |
+| c_email   | varchar(255) | YES  |     | NULL    |       |
+| c_address | varchar(255) | YES  |     | NULL    |       |
+| c_phno    | bigint       | YES  |     | NULL    |       |
+| bought    | varchar(25)  | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+6 rows in set (0.02 sec)
+
+ insert into Customer(c_id,c_name,c_email,c_address,c_phno)values(1,'Ashok','ashokd@vmail.com','Anand',9526412532);
+Query OK, 1 row affected (0.00 sec)
+mysql> insert into Customer(c_id,c_name,c_email,c_address,c_phno)values(2,'Sonakshi','sonakshig@vmail.com','Pune',9526412552);
+Query OK, 1 row affected (0.00 sec)
+mysql> insert into Customer(c_id,c_name,c_email,c_address,c_phno)values(3,'Saumya','saumyat@vmail.com','Nashik',7666294645);
+Query OK, 1 row affected (0.00 sec)
+mysql> insert into Customer(c_id,c_name,c_email,c_address,c_phno)values(4,'Isha','ishaa@vmail.com','Akola',8975752461);
+Query OK, 1 row affected (0.00 sec)
+mysql> insert into Customer(c_id,c_name,c_email,c_address,c_phno)values(5,'Payal','payalg@vmail.com','Mumbai',8975752432);
+Query OK, 1 row affected (0.00 sec)
+mysql> insert into Customer(c_id,c_name,c_email,c_address,c_phno)values(6,'Kedar','kedarp@vmail.com','Thane',8975752462);
+Query OK, 1 row affected (0.00 sec)
+mysql> insert into Customer(c_id,c_name,c_email,c_address,c_phno)values(7,'Prathamesh','prathameshk@vmail.com','Sangli',9284173178);
+Query OK, 1 row affected (0.00 sec)
+mysql> insert into Customer(c_id,c_name,c_email,c_address,c_phno)values(8,'Shruti','shrutij@vmail.com','Wardha',9119550205);
+Query OK, 1 row affected (0.00 sec)
+mysql> insert into Customer(c_id,c_name,c_email,c_address,c_phno)values(9,'Khushi','khushigj@vmail.com','Nagpur',9421540011);
+Query OK, 1 row affected (0.00 sec)
+insert into Customer(c_id,c_name,c_email,c_address,c_phno)values(10,'Rajat','rajatm@vmail.com','Gujrat',9325940011);
+Query OK, 1 row affected (0.00 sec)
+mysql> select * from Customer;
++------+------------+-----------------------+-----------+------------+--------+
+| c_id | c_name     | c_email               | c_address | c_phno     | bought |
++------+------------+-----------------------+-----------+------------+--------+
+|    1 | Ashok      | ashokd@vmail.com      | Anand     | 9526412532 | NULL   |
+|    2 | Sonakshi   | sonakshig@vmail.com   | Pune      | 9526412552 | NULL   |
+|    3 | Saumya     | saumyat@vmail.com     | Nashik    | 7666294645 | NULL   |
+|    4 | Isha       | ishaa@vmail.com       | Akola     | 8975752461 | NULL   |
+|    5 | Payal      | payalg@vmail.com      | Mumbai    | 8975752432 | NULL   |
+|    6 | Kedar      | kedarp@vmail.com      | Thane     | 8975752462 | NULL   |
+|    7 | Prathamesh | prathameshk@vmail.com | Sangli    | 9284173178 | NULL   |
+|    8 | Shruti     | shrutij@vmail.com     | Wardha    | 9119550205 | NULL   |
+|    9 | Khushi     | khushigj@vmail.com    | Nagpur    | 9421540011 | NULL   |
+|   10 | Rajat      | rajatm@vmail.com      | Gujrat    | 9325940011 | NULL   |
++------+------------+-----------------------+-----------+------------+--------+
+10 rows in set (0.00 sec)
+
+
+
+
+
+
+mysql> insert into Product(p_id,p_name,p_des,p_price,p_quantity,image)values(701,'Necklace','purple elegant necklace',6500.00,3,load_file("C:\Users\Sejal\OneDrive\Pictures\NeckLace1.jpeg"));
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into Product(p_id,p_name,p_des,p_price,p_quantity,image)values(702,'Necklace','simple perl necklace',9500.00,5,load_file("C:\Users\Sejal\OneDrive\Pictures\NeckLace2.jpeg"));
+Query OK, 1 row affected (0.00 sec)
+mysql> insert into Product(p_id,p_name,p_des,p_price,p_quantity,image)values(703,'Necklace','Necklace+Pendant',10000.00,4,load_file("C:\Users\Sejal\OneDrive\Pictures\NeckLace3.jpeg"));
+Query OK, 1 row affected (0.00 sec)
+mysql> insert into Product(p_id,p_name,p_des,p_price,p_quantity,image)values(704,'Diamond Set','American Diamond Single Line Solitaire Necklace',20500.00,4,load_file("C:\Users\Sejal\OneDrive\Pictures\pic4.jpeg"));
+Query OK, 1 row affected (0.00 sec)
+mysql> insert into Product(p_id,p_name,p_des,p_price,p_quantity,image)values(705,'Earrings','Emerald earring studs',2050.00,15,load_file("C:\Users\Sejal\OneDrive\Pictures\pic5.jpeg"));
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Product(p_id,p_name,p_des,p_price,p_quantity,image)values(706,'Earrings','Simple Golden Rings',3000.00,10,load_file("C:\Users\Sejal\OneDrive\Pictures\pic6.jpeg"));
+Query OK, 1 row affected (0.00 sec)
+mysql> insert into Product(p_id,p_name,p_des,p_price,p_quantity,image)values(708,'Rings','Diamond+Amethyst Ring',5000.00,20,load_file("C:\Users\Sejal\OneDrive\Pictures\pic 8.jpeg"));
+Query OK, 1 row affected (0.00 sec)
+mysql> insert into Product(p_id,p_name,p_des,p_price,p_quantity,image)values(709,'Rings','Simple elegant diamond ring formal',7500.00,13,load_file("C:\Users\Sejal\OneDrive\Pictures\pic9.jpeg"));
+Query OK, 1 row affected (0.00 sec)
+mysql> insert into Product(p_id,p_name,p_des,p_price,p_quantity,image)values(710,'Rings','Blue Saphhire and diamond ring',9500.00,19,load_file("C:\Users\Sejal\OneDrive\Pictures\pic10.jpeg"));
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from Product;
++------+-------------+-------------------------------------------------+----------+------------+--------------+
+| p_id | p_name      | p_des                                           | p_price  | p_quantity | image        |
++------+-------------+-------------------------------------------------+----------+------------+--------------+
+|  701 | Necklace    | purple elegant necklace                         |  6500.00 |          3 | 0x           |
+|  702 | Necklace    | simple perl necklace                            |  9500.00 |          5 | 0x           |
+|  703 | Necklace    | Necklace+Pendant                                | 10000.00 |          4 | 0x           |
+|  704 | Diamond Set | American Diamond Single Line Solitaire Necklace | 20500.00 |          4 | 0x           |
+|  705 | Earrings    | Emerald earring studs                           |  2050.00 |         15 | 0x           |
+|  706 | Earrings    | Simple Golden Rings                             |  3000.00 |         10 | 0x           |
+|  707 | Earrings    | Royal Dangling Diamond Earrings                 |  5000.00 |         20 | 0x           |
+|  708 | Rings       | Diamond+Amethyst Ring                           |  5000.00 |         20 | 0x           |
+|  709 | Rings       | Simple elegant diamond ring formal              |  7500.00 |         13 | 0x           |
+|  710 | Rings       | Blue Saphhire and diamond ring                  |  9500.00 |         19 | 0x           |
++------+-------------+-------------------------------------------------+----------+------------+--------------+
+10 rows in set (0.00 sec)
+
+mysql> ALTER table Customer modify c_id int AUTO_INCREMENT ;
+Query OK, 10 rows affected (0.10 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> desc Customer;
++-----------+--------------+------+-----+---------+----------------+
+| Field     | Type         | Null | Key | Default | Extra          |
++-----------+--------------+------+-----+---------+----------------+
+| c_id      | int          | NO   | PRI | NULL    | auto_increment |
+| c_name    | varchar(255) | YES  |     | NULL    |                |
+| c_email   | varchar(255) | YES  |     | NULL    |                |
+| c_address | varchar(255) | YES  |     | NULL    |                |
+| c_phno    | bigint       | YES  |     | NULL    |                |
+| bought    | varchar(25)  | YES  |     | NULL    |                |
++-----------+--------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+mysql> describe Product;
+ERROR 1046 (3D000): No database selected
+mysql> use NorthernTrust
+Database changed
+mysql> describe Product;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| p_id       | int          | NO   | PRI | NULL    |       |
+| p_name     | varchar(255) | YES  |     | NULL    |       |
+| p_des      | varchar(255) | YES  |     | NULL    |       |
+| p_price    | float(10,2)  | YES  |     | NULL    |       |
+| p_quantity | int          | YES  |     | NULL    |       |
+| p_img      | blob         | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> describe Customer;
++-----------+--------------+------+-----+---------+----------------+
+| Field     | Type         | Null | Key | Default | Extra          |
++-----------+--------------+------+-----+---------+----------------+
+| c_id      | int          | NO   | PRI | NULL    | auto_increment |
+| c_name    | varchar(255) | YES  |     | NULL    |                |
+| c_email   | varchar(255) | YES  |     | NULL    |                |
+| c_address | varchar(255) | YES  |     | NULL    |                |
+| c_phno    | bigint       | YES  |     | NULL    |                |
+| bought    | varchar(25)  | YES  |     | NULL    |                |
++-----------+--------------+------+-----+---------+----------------+
+6 rows in set (0.01 sec)
+
+mysql> describe RandR;
++---------+--------------+------+-----+---------+----------------+
+| Field   | Type         | Null | Key | Default | Extra          |
++---------+--------------+------+-----+---------+----------------+
+| r_no    | int          | NO   | PRI | NULL    | auto_increment |
+| c_id    | int          | YES  |     | NULL    |                |
+| p_id    | int          | YES  |     | NULL    |                |
+| comment | varchar(255) | YES  |     | NULL    |                |
+| rating  | int          | YES  |     | NULL    |                |
+| r_time  | timestamp    | YES  |     | NULL    |                |
++---------+--------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from Product
+    -> ;
++------+----------+-------------------------------------------------+---------+------------+--------------+
+| p_id | p_name   | p_des                                           | p_price | p_quantity | p_img        |
++------+----------+-------------------------------------------------+---------+------------+--------------+
+|  701 | Necklace | purple elegant necklace                         | 6500.00 |          3 | NULL         |
+|  702 | Necklace | American Diamond Single Line Solitaire Necklace | 6500.00 |          3 | NULL         |
+|  703 | Necklace | simple perl necklace                            | 6500.00 |          3 | NULL         |
+|  704 | Necklace | Necklace+Pendant                                | 6500.00 |          3 | NULL         |
+|  705 | Earrings | Emerald earring studs                           | 2050.00 |         15 | NULL         |
+|  706 | Earrings | Simple Golden Rings                             | 3000.00 |         10 | NULL         |
+|  707 | Earrings | Royal Dangling Earrings                         | 5700.00 |         20 | NULL         |
+|  708 | Rings    | Diamond+Amethyst Ring                           | 5000.00 |         20 | NULL         |
+|  709 | Rings    | Formal diamond ring                             | 5000.00 |         20 | NULL         |
+|  710 | Rings    | Blue Saphhire and diamond ring                  | 9500.00 |         19 | NULL         |
++------+----------+-------------------------------------------------+---------+------------+--------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from Customer;
++------+------------+--------------------------------+----------------------------+------------+--------+
+| c_id | c_name     | c_email                        | c_address                  | c_phno     | bought |
++------+------------+--------------------------------+----------------------------+------------+--------+
+|    1 | Ashok      | ashokd@vmail.com               | Anand                      | 9526412532 | NULL   |
+|    2 | Sonakshi   | sonakshig@vmail.com            | Pune                       | 9526412552 | NULL   |
+|    3 | Saumya     | saumyat@vmail.com              | Nashik                     | 7666294645 | NULL   |
+|    4 | Isha       | ishaa@vmail.com                | Akola                      | 8975752461 | NULL   |
+|    5 | Payal      | payalg@vmail.com               | Mumbai                     | 8975752432 | NULL   |
+|    6 | Kedar      | kedarp@vmail.com               | Thane                      | 8975752462 | NULL   |
+|    7 | Prathamesh | prathameshk@vmail.com          | Sangli                     | 9284173178 | NULL   |
+|    8 | Shruti     | shrutij@vmail.com              | Wardha                     | 9119550205 | NULL   |
+|    9 | Khushi     | khushigj@vmail.com             | Nagpur                     | 9421540011 | NULL   |
+|   10 | Rajat      | rajatm@vmail.com               | Gujrat                     | 9325940011 | NULL   |
+|   11 | Saniya     | saniya.damle@cumminscollege.in | Pune                       | 9876543210 | YES    |
+|   12 | Aum        | am@yahoo.com                   | Pune                       | 8989234567 | YES    |
+|   13 | Shraddha   | smd@gmail.com                  | Pune                       | 8977345632 | YES    |
+|   14 | Mandar     | mnd@yahoo.com                  | Pune                       | 9874637182 | YES    |
+|   15 | Aditya     | adi@yahoo.com                  | Pune                       | 9874137182 | YES    |
+|   19 | Aditya     | adi@yahoo.com                  | Pune                       | 9874137182 | YES    |
+|   20 | Kavita     | kbm@yahoo.com                  | Pune                       | 9874137181 | YES    |
+|   21 | Disha      | iced@gmail.com                 | Doha                       | 9087456321 | YES    |
+|   22 | Disha      | iced@gmail.com                 | Doha                       | 9087456321 | YES    |
+|   23 | Disha      | iced@gmail.com                 | Doha                       | 9087456321 | YES    |
+|   55 | Sejal      | sejal@gmail.com                | Nashik                     | 9988765120 | YES    |
+|   56 | San        | sansan                         | Pune                       | 9876347693 | YES    |
+|   57 | Viva       | viv@gmail.com                  | Pune                       | 9546738264 | YES    |
+|   58 | Bhaskar    | brm@gmail.com                  | 425/15, Brahmanpuri, Miraj | 9978456975 | yes    |
+|   59 | John       | jh@yahoo.com                   | USA                        |  123456789 | NULL   |
+|   60 | mary       | mm@yahoo.com                   | USA                        |  123456783 | NULL   |
+|   61 | Linda      | LD@yahoo.com                   | USA                        |  124456783 | NULL   |
+|   62 | Sheila     | shla@gmail.com                 | Mumbai                     | 8876455623 | NULL   |
+|   63 | Amy        | ames@yahoo.com                 | Brooklyn                   | 1245267890 | NULL   |
++------+------------+--------------------------------+----------------------------+------------+--------+
+29 rows in set (0.00 sec)
+
+mysql> select * from Rand R;
+ERROR 1146 (42S02): Table 'northerntrust.rand' doesn't exist
+mysql> select * from RandR;
++------+------+------+----------------------------------------+--------+---------------------+
+| r_no | c_id | p_id | comment                                | rating | r_time              |
++------+------+------+----------------------------------------+--------+---------------------+
+|  104 |   14 |  701 | Beautiful collection                   |      4 | 2022-10-18 07:29:08 |
+|  105 |   14 |  701 | WOW                                    |      5 | 2022-10-18 08:29:18 |
+|  106 |   11 |  702 | Masta                                  |      5 | 2022-10-18 08:35:30 |
+|  107 |   13 |  706 | Light weight jewellery                 |      4 | 2022-10-18 11:13:58 |
+|  108 |   11 |  705 | Amazing!!                              |      3 | 2022-10-18 11:14:21 |
+|  109 |   59 |  702 | American diamonds ! Elegant look       |      4 | 2022-10-18 12:08:46 |
+|  112 |    2 |  701 | ok.Fine                                |      3 | 2022-10-18 12:22:55 |
+|  113 |    3 |  710 | Good gem quality                       |      4 | 2022-10-18 12:30:13 |
+|  114 |    4 |  707 | Ok types                               |      1 | 2022-10-18 12:35:55 |
+|  115 |    2 |  702 | Nice Diamonds !                        |      4 | 2022-10-18 12:37:26 |
+|  116 |    4 |  705 | Very cool                              |      3 | 2022-10-18 12:47:42 |
+|  117 |    1 |  706 | Got a better gift wrapper this time :) |      4 | 2022-10-18 13:34:55 |
+|  123 |   20 |  703 | Good quality pearls!                   |      4 | 2022-10-18 13:29:28 |
+|  124 |   57 |  704 | Cute pendant , can use even with water |      3 | 2022-10-18 13:30:30 |
+|  125 |   21 |  708 | A bit expensive :(                     |      3 | 2022-10-18 13:31:21 |
+|  126 |   63 |  710 | Good                                   |      3 | 2022-10-18 13:55:28 |
+|  127 |   63 |  705 | Just perfect                           |      2 | 2022-10-18 13:59:31 |
++------+------+------+----------------------------------------+--------+---------------------+
+17 rows in set (0.00 sec)
+
